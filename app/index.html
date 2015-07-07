@@ -1,21 +1,34 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="phoneCatApp">
+<html lang="en" ng-app="phoneCatApp" ng-controller="PhoneListCtrl as ctrl">
 <head>
     <meta charset="UTF-8">
-    <title>My HTML File</title>
+    <title ng-bind-template="Google Phone Gallery: {{query}}">
+        Google Phone Gallery</title>
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="css/app.css">
     <script src="bower_components/angular/angular.js"></script>
     <script src="js/controllers.js"></script>
 </head>
-<body ng-controller="PhoneListCtrl as ctrl">
+<body>
 
-<ul>
-    <li ng-repeat="phone in ctrl.phones">
-        <span>{{ phone.name }}</span>
-        <p>{{ phone.snippet }}</p>
-    </li>
-</ul>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2">
+            Search: <input ng-model="query">
+        </div>
+    </div>
+
+    <div class="col-md-10">
+        <ul>
+            <li ng-repeat="phone in ctrl.phones | filter:query">
+                <span>{{ phone.name }}</span>
+                <p>{{ phone.snippet }}</p>
+            </li>
+        </ul>
+    </div>
+
+</div>
+
 
 <p>Total number of phones: {{ ctrl.phones.length }}</p>
 
